@@ -73,7 +73,7 @@ print("Step 2: set up the EWMA monitoring chart ...")
 
 monitoring_dic, prediction_model, sigma_hat = monitoring_initialization(
     monitoring_type, prediction_model, x_initial, y_initial,
-    SLIDING_WINDOW_LEN, BUDGET, UCL=UCL, seed=seed)
+    n_init, BUDGET, UCL=UCL, seed=seed)
 print(f"  sigma_hat = {sigma_hat:.4f} | UCL = {UCL}")
 
 
