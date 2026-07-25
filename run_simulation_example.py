@@ -62,6 +62,7 @@ boundaries = BOUNDARIES[function]
 n_init     = N_INIT_SAMPLE[function]
 grid_res   = GRID_RES[function]
 bandwidth  = KDE_BANDWIDTH[function]
+SLIDING_WINDOW_LEN = min(2000, n_init)
 
 prediction_model, x_initial, y_initial = model_initialization(
     function, boundaries, n_init, noise, predictor_path, seed=seed)
@@ -73,13 +74,12 @@ print("Step 2: set up the EWMA monitoring chart ...")
 
 monitoring_dic, prediction_model, sigma_hat = monitoring_initialization(
     monitoring_type, prediction_model, x_initial, y_initial,
-    n_init, BUDGET, UCL=UCL, seed=seed)
+    BUDGET, UCL=UCL, seed=seed)
 print(f"  sigma_hat = {sigma_hat:.4f} | UCL = {UCL}")
 
 
 # The first n_init points were used to fit `prediction_model`; from here on
 # only the most recent SLIDING_WINDOW_LEN points seed the monitoring pool.
-SLIDING_WINDOW_LEN = min(2000, n_init)
 x_initial = x_initial[-SLIDING_WINDOW_LEN:]
 y_initial = y_initial[-SLIDING_WINDOW_LEN:]
 
