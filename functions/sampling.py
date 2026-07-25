@@ -114,7 +114,7 @@ def get_samples(budget, last_zeroed_time, run_length, boundaries, grid_res, epsi
     if n_exploitation and n_exploration:
         # Exploitation first, then exploration (which also updates the visit map).
         new_kde_samples = adaptive_sampling(x_samples_available, weights, boundaries,
-                                            n_exploitation, bandwidth)
+                                            n_exploitation, bandwidth, rng)
         last_zeroed_time = _update_zeroed_time(
             new_kde_samples, last_zeroed_time, run_length + 1,
             boundaries, grid_res, cell_width)
@@ -124,7 +124,7 @@ def get_samples(budget, last_zeroed_time, run_length, boundaries, grid_res, epsi
         new_x_samples = np.vstack([new_kde_samples, new_rnd_samples])
     elif n_exploitation:
         new_x_samples = adaptive_sampling(x_samples_available, weights, boundaries,
-                                          n_exploitation, bandwidth)
+                                          n_exploitation, bandwidth, rng)
     else:
         new_x_samples, last_zeroed_time = random_sampling(
             last_zeroed_time, run_length, boundaries, grid_res, cell_width,
