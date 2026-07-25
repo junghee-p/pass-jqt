@@ -12,7 +12,7 @@ from sklearn.neighbors import KernelDensity
 # =============================================================================
 # Exploitation: residual-weighted KDE
 # =============================================================================
-def adaptive_sampling(x_available, residuals, boundaries, n_exploitation, bandwidth):
+def adaptive_sampling(x_available, residuals, boundaries, n_exploitation, bandwidth, rng):
     """
     Draw `n_exploitation` points from a KDE fitted on `x_available` with weights
     proportional to `residuals` (squared residuals in practice). Samples that
@@ -21,8 +21,8 @@ def adaptive_sampling(x_available, residuals, boundaries, n_exploitation, bandwi
     # 'scott' is a placeholder; we overwrite bandwidth_ explicitly below.
     kde = KernelDensity(bandwidth='scott').fit(x_available, sample_weight=residuals)
     kde.bandwidth_ = bandwidth
-
-    new_kde_samples = kde.sample(n_exploitation, random_state=0)
+    seed = int(rng.integers(0, 2**32 - 1))
+    new_kde_samples = kde.sample(n_exploitation, random_state=seed)
 
     # Reflect out-of-domain samples.
     for d in range(len(boundaries)):
