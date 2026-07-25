@@ -40,7 +40,7 @@ def model_initialization(function, boundaries, n_init_sample, noise,
 # Monitoring initialization with a user-supplied UCL
 # =============================================================================
 def monitoring_initialization(mon, prediction_model, x_initial, y_initial,
-                              n_init_sample, budget, UCL, seed=0):
+                              budget, UCL, seed=0):
     """
     Compute sigma_hat from the reference residuals and build the chart dict.
 
