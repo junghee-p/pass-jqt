@@ -1,8 +1,7 @@
 # PASS: Probabilistic Adaptive Sampling Strategy
 
 Reference implementation for the paper
-**"An Adaptive Sampling Framework for Detecting Localized Concept Drift under Label Scarcity"**
-(submitted to *Journal of Quality Technology*, manuscript ID UJQT-2025-0178).
+**"An Adaptive Sampling Framework for Detecting Localized Concept Drift under Label Scarcity"**.
 
 The repository reproduces:
 
